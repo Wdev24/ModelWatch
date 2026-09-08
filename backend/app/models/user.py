@@ -19,3 +19,4 @@ class User(Base):
     )
 
     api_keys: Mapped[list["ApiKey"]] = relationship(back_populates="user", cascade="all, delete-orphan")
+    models: Mapped[list["Model"]] = relationship(back_populates="user", cascade="all, delete-orphan")
