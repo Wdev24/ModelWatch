@@ -6,6 +6,7 @@ Routers for models/versions/features/etc. are added in later milestones.
 """
 from fastapi import FastAPI
 
+from app.api.auth import router as auth_router
 from app.core.config import get_settings
 
 settings = get_settings()
@@ -15,6 +16,8 @@ app = FastAPI(
     description="ML data-drift monitoring platform.",
     version="0.1.0",
 )
+
+app.include_router(auth_router)
 
 
 @app.get("/health", tags=["health"])
