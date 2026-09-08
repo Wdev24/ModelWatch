@@ -9,3 +9,7 @@ from app.models.api_key import ApiKey  # noqa: F401
 from app.models.model import Model  # noqa: F401
 from app.models.model_version import ModelVersion  # noqa: F401
 from app.models.feature import Feature  # noqa: F401
+from app.models.reference_snapshot import ReferenceSnapshot  # noqa: F401
+from app.models.reference_stats import ReferenceStats  # noqa: F401
+from app.models.reference_raw_sample import ReferenceRawSample  # noqa: F401
+from app.models.reference_raw_categorical import ReferenceRawCategorical  # noqa: F401
