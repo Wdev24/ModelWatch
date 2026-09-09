@@ -9,7 +9,7 @@
 - [x] M5 — Production Ingestion + Data Quality
 - [x] M6 — Drift Engine
 - [x] M7 — Drift Persistence + APIs
-- [ ] M8 — Redis/RQ + Monitoring Jobs
+- [x] M8 — Redis/RQ + Monitoring Jobs
 - [ ] M9 — Scheduling
 - [ ] M10 — Alerts
 - [ ] M11 — Dashboard
