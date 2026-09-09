@@ -19,7 +19,7 @@ Windowing policy (spec section 9), fixed and documented for V1:
 import uuid
 from datetime import datetime, timezone
 
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 
 from app.drift.engine import (
     FeatureStatus,
@@ -232,6 +232,7 @@ def list_drift_runs(db: Session, user, model_version_id: uuid.UUID) -> list[Drif
     version = get_owned_version(db, user, model_version_id)
     return (
         db.query(DriftRun)
+        .options(selectinload(DriftRun.feature_results))
         .filter(DriftRun.model_version_id == version.id)
         .order_by(DriftRun.created_at)
         .all()
@@ -271,3 +272,5 @@ def overall_drift_status(drift_run: DriftRun) -> str:
     if all(s == FeatureStatus.insufficient_data for s in statuses):
         return FeatureStatus.insufficient_data.value
     return FeatureStatus.ok.value
+
+

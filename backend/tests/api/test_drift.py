@@ -90,3 +90,36 @@ def test_second_drift_run_only_covers_new_observations(client):
     second = client.post(f"/versions/{version_id}/drift-runs", json={}, headers=headers).json()
     assert second["status"] == "empty"
     assert second["feature_results"] == []
+
+def test_list_drift_run_history_includes_overall_status(client):
+    signup = client.post(
+        "/signup",
+        json={"email": "drifthistorystatus@example.com", "password": "supersecret"},
+    )
+    headers = {"X-API-Key": signup.json()["api_key"]["api_key"]}
+
+    version_id, _ = _setup_with_reference_and_obs(
+        client,
+        headers,
+        n_ref=40,
+        n_obs=35,
+    )
+
+    run = client.post(
+        f"/versions/{version_id}/drift-runs",
+        json={},
+        headers=headers,
+    )
+    assert run.status_code == 201
+
+    expected_status = run.json()["overall_status"]
+
+    resp = client.get(
+        f"/versions/{version_id}/drift-runs",
+        headers=headers,
+    )
+
+    assert resp.status_code == 200
+    history = resp.json()
+    assert len(history) == 1
+    assert history[0]["overall_status"] == expected_status

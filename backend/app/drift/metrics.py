@@ -22,13 +22,20 @@ def numeric_bin_edges(reference_values: list[float], n_bins: int = 10) -> np.nda
     """
     arr = np.asarray(reference_values, dtype=float)
     quantiles = np.linspace(0, 1, n_bins + 1)
-    edges = np.quantile(arr, quantiles)
-    edges = np.unique(edges)
+    edges = np.unique(np.quantile(arr, quantiles))
+
     if len(edges) < 2:
-        # Constant reference distribution: fabricate a minimal bracketing
-        # bin so downstream histogramming doesn't error out.
+        # Constant reference distribution: create a narrow central bin around
+        # the reference value plus open-ended outer bins so shifted production
+        # values are counted as divergence.
         center = edges[0] if len(edges) else 0.0
-        edges = np.array([center - 0.5, center + 0.5])
+        edges = np.array([-np.inf, center - 0.5, center + 0.5, np.inf])
+    else:
+        # Open-ended outer bins ensure production values outside the
+        # reference range are not silently discarded.
+        edges[0] = -np.inf
+        edges[-1] = np.inf
+
     return edges
 
 

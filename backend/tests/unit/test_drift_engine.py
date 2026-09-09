@@ -68,6 +68,34 @@ def test_constant_reference_shifted_production_is_drifted():
     assert result.feature_status == FeatureStatus.drifted
 
 
+def test_numeric_metrics_handle_production_values_outside_reference_range():
+    reference = list(range(10, 40))
+    production = list(range(80, 110))
+
+    result = evaluate_numeric_feature(reference, production)
+
+    metric_by_name = {m.metric_name: m for m in result.metrics}
+
+    assert result.feature_status == FeatureStatus.drifted
+    assert metric_by_name["psi"].metric_value > 0
+    assert metric_by_name["js"].metric_value > 0
+    assert metric_by_name["ks"].metric_value == 1.0
+    assert metric_by_name["ks"].p_value < 0.05
+
+
+def test_constant_reference_shifted_production_produces_nonzero_divergence():
+    reference = [5.0] * 50
+    production = [50.0] * 50
+
+    result = evaluate_numeric_feature(reference, production)
+
+    metric_by_name = {m.metric_name: m for m in result.metrics}
+
+    assert result.feature_status == FeatureStatus.drifted
+    assert metric_by_name["psi"].metric_value > 0
+    assert metric_by_name["js"].metric_value > 0
+
+
 # ---------------------------------------------------------------------------
 # Categorical distributions
 # ---------------------------------------------------------------------------

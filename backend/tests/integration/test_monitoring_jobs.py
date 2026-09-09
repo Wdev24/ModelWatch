@@ -10,6 +10,10 @@ import uuid as uuid_module
 
 import pytest
 from rq import SimpleWorker
+from rq.timeouts import TimerDeathPenalty
+class WindowsSimpleWorker(SimpleWorker):
+    death_penalty_class = TimerDeathPenalty
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -67,7 +71,7 @@ def test_enqueued_job_runs_via_worker_and_completes(real_db):
 
     job = enqueue_monitoring_job(real_db, user, version.id)
 
-    worker = SimpleWorker([monitoring_queue], connection=monitoring_queue.connection)
+    worker = WindowsSimpleWorker([monitoring_queue], connection=monitoring_queue.connection)
     worker.work(burst=True)
 
     real_db.expire_all()
@@ -87,7 +91,7 @@ def test_completed_job_is_idempotent_on_rerun(real_db):
     real_db.commit()
 
     job = enqueue_monitoring_job(real_db, user, version.id)
-    worker = SimpleWorker([monitoring_queue], connection=monitoring_queue.connection)
+    worker = WindowsSimpleWorker([monitoring_queue], connection=monitoring_queue.connection)
     worker.work(burst=True)
 
     real_db.expire_all()
@@ -107,7 +111,7 @@ def test_job_for_missing_reference_snapshot_marks_failed(real_db):
     # No reference snapshot created for this version.
     job = enqueue_monitoring_job(real_db, user, version.id)
 
-    worker = SimpleWorker([monitoring_queue], connection=monitoring_queue.connection)
+    worker = WindowsSimpleWorker([monitoring_queue], connection=monitoring_queue.connection)
     worker.work(burst=True)
 
     real_db.expire_all()

@@ -42,11 +42,13 @@ class DriftRunOut(BaseModel):
     window_start: datetime
     window_end: datetime
     status: str
+    overall_status: str = "pending"
     threshold_config_snapshot: dict
     triggered_by: str
     created_at: datetime
 
 
 class DriftRunDetailOut(DriftRunOut):
-    overall_status: str = "pending"
     feature_results: list[FeatureDriftResultOut] = []
+
+

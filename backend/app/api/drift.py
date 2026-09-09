@@ -62,7 +62,13 @@ def list_drift_runs_endpoint(
         runs = list_drift_runs(db, current_user, version_id)
     except NotFoundError:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Model version not found.")
-    return [DriftRunOut.model_validate(r) for r in runs]
+    outputs = []
+    for run in runs:
+        out = DriftRunOut.model_validate(run)
+        out.overall_status = overall_drift_status(run)
+        outputs.append(out)
+
+    return outputs
 
 
 @router.get("/drift-runs/{drift_run_id}", response_model=DriftRunDetailOut)
@@ -78,3 +84,4 @@ def get_drift_run_endpoint(
     out = DriftRunDetailOut.model_validate(run)
     out.overall_status = overall_drift_status(run)
     return out
+
