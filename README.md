@@ -4,10 +4,13 @@ A web-based ML data-drift monitoring platform. Register models, upload
 reference baselines, ingest production observations, and run PSI / KS /
 Jensen-Shannon drift checks — with results in a React dashboard.
 
-This repository is being built milestone by milestone (see `PROGRESS.md`).
-**Current milestone: M1 — Foundation.** Only the application skeleton,
-health check, and local infrastructure exist so far. No auth, database
-models, drift engine, or dashboard yet.
+This repository was built milestone by milestone (see `PROGRESS.md`).
+**Status: V1 complete (M1–M12).** Signup through drift detection, alerts,
+scheduling, async job processing, and a real dashboard all work
+end-to-end locally. Production hardening (security, rate limiting,
+observability, CI/CD, deployment) is a deliberately separate future
+phase — see `PROGRESS.md` and the original spec for what's intentionally
+deferred.
 
 ## Architecture (target, built incrementally)
 
