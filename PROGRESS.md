@@ -7,7 +7,7 @@
 - [x] M3 — Model Registry
 - [x] M4 — Reference Snapshots
 - [x] M5 — Production Ingestion + Data Quality
-- [ ] M6 — Drift Engine
+- [x] M6 — Drift Engine
 - [ ] M7 — Drift Persistence + APIs
 - [ ] M8 — Redis/RQ + Monitoring Jobs
 - [ ] M9 — Scheduling
