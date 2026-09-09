@@ -1,1 +1,0 @@
-{"root":["./src/App.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/api/client.ts","./src/components/AuthGate.tsx","./src/components/DriftDashboard.tsx","./src/components/FeaturesAndReference.tsx","./src/components/ModelSelector.tsx"],"version":"5.9.3"}
