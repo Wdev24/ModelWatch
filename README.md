@@ -213,102 +213,32 @@ The React dashboard provides:
 
 ```text
 modelwatch/
-|
-â”œâ”€â”€ .gitignore
-â”œâ”€â”€ README.md
-â”œâ”€â”€ PROGRESS.md
-â”œâ”€â”€ docker-compose.yml
-|
-â”œâ”€â”€ backend/
-â”‚   â”œâ”€â”€ .env.example
-â”‚   â”œâ”€â”€ alembic.ini
-â”‚   â”œâ”€â”€ pytest.ini
-â”‚   â”œâ”€â”€ requirements.txt
-â”‚   |
-â”‚   â”œâ”€â”€ alembic/
-â”‚   â”‚   â””â”€â”€ versions/
-â”‚   â”‚       â”œâ”€â”€ create_users_and_api_keys_tables.py
-â”‚   â”‚       â”œâ”€â”€ create_models_model_versions_features_.py
-â”‚   â”‚       â”œâ”€â”€ create_reference_snapshot_tables.py
-â”‚   â”‚       â”œâ”€â”€ create_production_observations_table.py
-â”‚   â”‚       â”œâ”€â”€ create_drift_runs_feature_drift_results_.py
-â”‚   â”‚       â”œâ”€â”€ create_monitoring_jobs_table.py
-â”‚   â”‚       â”œâ”€â”€ create_monitoring_schedules_table_and_.py
-â”‚   â”‚       â””â”€â”€ create_alerts_and_alert_deliveries_.py
-â”‚   |
-â”‚   â”œâ”€â”€ app/
-â”‚   â”‚   â”œâ”€â”€ main.py
-â”‚   â”‚   â”œâ”€â”€ scheduler.py
-â”‚   â”‚   |
-â”‚   â”‚   â”œâ”€â”€ api/
-â”‚   â”‚   â”‚   â”œâ”€â”€ auth.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ registry.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ reference.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ ingestion.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ drift.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ monitoring_jobs.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ schedules.py
-â”‚   â”‚   â”‚   â””â”€â”€ alerts.py
-â”‚   â”‚   |
-â”‚   â”‚   â”œâ”€â”€ core/
-â”‚   â”‚   â”‚   â”œâ”€â”€ config.py
-â”‚   â”‚   â”‚   â””â”€â”€ security.py
-â”‚   â”‚   |
-â”‚   â”‚   â”œâ”€â”€ db/
-â”‚   â”‚   â”‚   â”œâ”€â”€ base.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ base_class.py
-â”‚   â”‚   â”‚   â””â”€â”€ session.py
-â”‚   â”‚   |
-â”‚   â”‚   â”œâ”€â”€ drift/
-â”‚   â”‚   â”‚   â”œâ”€â”€ engine.py
-â”‚   â”‚   â”‚   â””â”€â”€ metrics.py
-â”‚   â”‚   |
-â”‚   â”‚   â”œâ”€â”€ models/
-â”‚   â”‚   â”‚   â”œâ”€â”€ user.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ api_key.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ model.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ model_version.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ feature.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ reference_snapshot.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ reference_stats.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ reference_raw_sample.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ reference_raw_categorical.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ production_observation.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ drift_run.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ feature_drift_result.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ feature_drift_metric.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ monitoring_schedule.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ monitoring_job.py
-â”‚   â”‚   â”‚   â”œâ”€â”€ alert.py
-â”‚   â”‚   â”‚   â””â”€â”€ alert_delivery.py
-â”‚   â”‚   |
-â”‚   â”‚   â”œâ”€â”€ schemas/
-â”‚   â”‚   â”œâ”€â”€ services/
-â”‚   â”‚   â””â”€â”€ workers/
-â”‚   â”‚       â”œâ”€â”€ queue.py
-â”‚   â”‚       â””â”€â”€ tasks.py
-â”‚   |
-â”‚   â””â”€â”€ tests/
-â”‚       â”œâ”€â”€ api/
-â”‚       â”œâ”€â”€ integration/
-â”‚       â””â”€â”€ unit/
-|
-â””â”€â”€ frontend/
-    â”œâ”€â”€ index.html
-    â”œâ”€â”€ package.json
-    â”œâ”€â”€ package-lock.json
-    â”œâ”€â”€ tsconfig.json
-    â”œâ”€â”€ vite.config.ts
-    â””â”€â”€ src/
-        â”œâ”€â”€ App.tsx
-        â”œâ”€â”€ main.tsx
-        â”œâ”€â”€ api/
-        â”‚   â””â”€â”€ client.ts
-        â””â”€â”€ components/
-            â”œâ”€â”€ AuthGate.tsx
-            â”œâ”€â”€ ModelSelector.tsx
-            â”œâ”€â”€ FeaturesAndReference.tsx
-            â””â”€â”€ DriftDashboard.tsx
+│
+├── backend/
+│   ├── app/
+│   │   ├── api/          # REST API routes
+│   │   ├── core/         # Config & security
+│   │   ├── db/           # Database setup
+│   │   ├── drift/        # Drift engine & metrics
+│   │   ├── models/       # SQLAlchemy models
+│   │   ├── schemas/      # Pydantic schemas
+│   │   ├── services/     # Business logic
+│   │   └── workers/      # RQ background jobs
+│   │
+│   ├── alembic/          # Database migrations
+│   └── tests/
+│       ├── api/
+│       ├── integration/
+│       └── unit/
+│
+├── frontend/
+│   └── src/
+│       ├── api/          # Backend API client
+│       └── components/   # React UI components
+│
+├── docker-compose.yml    # PostgreSQL + Redis
+├── README.md
+└── PROGRESS.md
 ```
 
 ---
@@ -640,26 +570,26 @@ The suite also contains regression tests for the quantitative binning issue and 
 ### Implemented
 
 ```text
-âœ… Authentication
-âœ… Model registry
-âœ… Model versions
-âœ… Feature definitions
-âœ… Reference snapshots
-âœ… Production observation ingestion
-âœ… Data-quality tracking
-âœ… PSI
-âœ… KS
-âœ… Jensen-Shannon
-âœ… Drift classification
-âœ… Deterministic non-overlapping windows
-âœ… Historical drift runs
-âœ… Redis / RQ asynchronous jobs
-âœ… Scheduling
-âœ… Alerts
-âœ… React dashboard
-âœ… Live API E2E validation
-âœ… Live UI validation
-âœ… Quantitative regression tests
+[OK] Authentication
+[OK] Model registry
+[OK] Model versions
+[OK] Feature definitions
+[OK] Reference snapshots
+[OK] Production observation ingestion
+[OK] Data-quality tracking
+[OK] PSI
+[OK] KS
+[OK] Jensen-Shannon
+[OK] Drift classification
+[OK] Deterministic non-overlapping windows
+[OK] Historical drift runs
+[OK] Redis / RQ asynchronous jobs
+[OK] Scheduling
+[OK] Alerts
+[OK] React dashboard
+[OK] Live API E2E validation
+[OK] Live UI validation
+[OK] Quantitative regression tests
 ```
 
 ### Current V1 characterization
