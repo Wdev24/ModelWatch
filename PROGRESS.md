@@ -10,7 +10,7 @@
 - [x] M6 — Drift Engine
 - [x] M7 — Drift Persistence + APIs
 - [x] M8 — Redis/RQ + Monitoring Jobs
-- [ ] M9 — Scheduling
+- [x] M9 — Scheduling
 - [ ] M10 — Alerts
 - [ ] M11 — Dashboard
 - [ ] M12 — End-to-End Testing + V1 stabilization

@@ -22,9 +22,8 @@ class MonitoringJob(Base):
     and scheduled triggers both create one of these and enqueue the same
     worker task (spec section 13), so there is one execution path.
 
-    `schedule_id` has no FK yet — MonitoringSchedule doesn't exist until
-    M9. The FK constraint is added there; the column is nullable UUID for
-    now, populated only by scheduled runs.
+    `schedule_id` is nullable (populated only for scheduled runs; manual
+    runs leave it null) and FKs to MonitoringSchedule, added in M9.
 
     `drift_run_id` is not in the original domain model list but is a
     reasonable, documented V1 addition: without it, a client polling job
@@ -34,7 +33,9 @@ class MonitoringJob(Base):
     __tablename__ = "monitoring_jobs"
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    schedule_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True, index=True)
+    schedule_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("monitoring_schedules.id", ondelete="SET NULL"), nullable=True, index=True
+    )
     model_version_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("model_versions.id", ondelete="CASCADE"), nullable=False, index=True
     )

@@ -66,6 +66,22 @@ Expected response:
 {"status": "ok", "app": "ModelWatch", "environment": "local"}
 ```
 
+Run the drift-check worker (separate terminal, same venv):
+
+```powershell
+cd backend
+.\.venv\Scripts\Activate.ps1
+rq worker monitoring --url redis://localhost:6379/0
+```
+
+Run the scheduler (separate terminal, same venv) — finds due `MonitoringSchedule`s and enqueues jobs; does not compute drift itself:
+
+```powershell
+cd backend
+.\.venv\Scripts\Activate.ps1
+python -m app.scheduler
+```
+
 ### Run backend tests
 
 ```powershell

@@ -18,3 +18,4 @@ from app.models.drift_run import DriftRun  # noqa: F401
 from app.models.feature_drift_result import FeatureDriftResult  # noqa: F401
 from app.models.feature_drift_metric import FeatureDriftMetric  # noqa: F401
 from app.models.monitoring_job import MonitoringJob  # noqa: F401
+from app.models.monitoring_schedule import MonitoringSchedule  # noqa: F401
