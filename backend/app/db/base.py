@@ -14,3 +14,6 @@ from app.models.reference_stats import ReferenceStats  # noqa: F401
 from app.models.reference_raw_sample import ReferenceRawSample  # noqa: F401
 from app.models.reference_raw_categorical import ReferenceRawCategorical  # noqa: F401
 from app.models.production_observation import ProductionObservation  # noqa: F401
+from app.models.drift_run import DriftRun  # noqa: F401
+from app.models.feature_drift_result import FeatureDriftResult  # noqa: F401
+from app.models.feature_drift_metric import FeatureDriftMetric  # noqa: F401
