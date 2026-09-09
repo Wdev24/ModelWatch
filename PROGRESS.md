@@ -12,5 +12,5 @@
 - [x] M8 — Redis/RQ + Monitoring Jobs
 - [x] M9 — Scheduling
 - [x] M10 — Alerts
-- [ ] M11 — Dashboard
+- [x] M11 — Dashboard
 - [ ] M12 — End-to-End Testing + V1 stabilization
