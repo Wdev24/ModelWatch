@@ -7,6 +7,7 @@ Routers for models/versions/features/etc. are added in later milestones.
 from fastapi import FastAPI
 
 from app.api.auth import router as auth_router
+from app.api.alerts import router as alerts_router
 from app.api.drift import router as drift_router
 from app.api.ingestion import router as ingestion_router
 from app.api.monitoring_jobs import router as monitoring_jobs_router
@@ -30,6 +31,7 @@ app.include_router(ingestion_router)
 app.include_router(drift_router)
 app.include_router(monitoring_jobs_router)
 app.include_router(schedules_router)
+app.include_router(alerts_router)
 
 
 @app.get("/health", tags=["health"])

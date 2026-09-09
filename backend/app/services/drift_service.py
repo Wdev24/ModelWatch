@@ -35,6 +35,7 @@ from app.models.drift_run import DriftRun, DriftRunStatus, TriggeredBy
 from app.models.feature import Feature, FeatureDataType
 from app.models.feature_drift_metric import FeatureDriftMetric
 from app.models.feature_drift_result import FeatureDriftResult
+from app.models.alert import Alert
 from app.models.production_observation import ObservationStatus, ProductionObservation
 from app.models.reference_raw_categorical import ReferenceRawCategorical
 from app.models.reference_raw_sample import ReferenceRawSample
@@ -207,6 +208,18 @@ def run_drift_check(
                     p_value=metric.p_value,
                     threshold_used=metric.threshold_used,
                     status=metric.status,
+                )
+            )
+
+        if evaluation_status == FeatureStatus.drifted:
+            drifted_metric_names = ", ".join(m.metric_name for m in metric_results if m.status.value == "drifted")
+            db.add(
+                Alert(
+                    model_version_id=version.id,
+                    feature_id=feature.id,
+                    drift_run_id=drift_run.id,
+                    severity="high",
+                    message=f"Feature '{feature.name}' drifted (metrics over threshold: {drifted_metric_names}).",
                 )
             )
 

@@ -11,6 +11,6 @@
 - [x] M7 — Drift Persistence + APIs
 - [x] M8 — Redis/RQ + Monitoring Jobs
 - [x] M9 — Scheduling
-- [ ] M10 — Alerts
+- [x] M10 — Alerts
 - [ ] M11 — Dashboard
 - [ ] M12 — End-to-End Testing + V1 stabilization
